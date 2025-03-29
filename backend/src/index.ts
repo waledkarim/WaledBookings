@@ -4,6 +4,7 @@ import "dotenv/config";
 import connectDB from "./utils/db";
 import userRoutes from "./routes/user";
 import authRoutes from "./routes/auth";
+import myHotelRoutes from "./routes/my-hotels";
 import cookieParser from "cookie-parser";
 import path from "path";
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/my-hotels", myHotelRoutes);
 
 app.listen(PORT, () => {
     connectDB();
