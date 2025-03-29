@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { useForm } from "react-hook-form";
 import * as apiCient from "../api-client";
 import { useAppContext } from "../contexts/AppContext.tsx";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export type RegisterFormData = {
     firstName: string;
@@ -18,7 +18,7 @@ const Register = () => {
 
   
   const { showToast } = useAppContext();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const queryClient = useQueryClient();
   
   const { register, watch, handleSubmit, formState: { errors } } = useForm<RegisterFormData>();

@@ -18,10 +18,6 @@ const Header = () => {
         setOpen(!open);
     }
 
-    function handleSignOut(): void{
-
-    }
-
     return (
         // The container that bleeds
         <div className="fixed left-0 right-0 py-6 h-20">
