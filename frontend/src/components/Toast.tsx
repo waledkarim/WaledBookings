@@ -8,15 +8,15 @@ type ToastProps = {
 
 const Toast = ({ message, type, onClose }: ToastProps) => {
   useEffect(() => {
-    if(type !== "LOADING"){
+
       const timer = setTimeout(() => {
         onClose();
-      }, 5000);
+      }, 3000);
   
       return () => {
         clearTimeout(timer);
       };
-    }
+
   }, [onClose]);
 
   const styles =

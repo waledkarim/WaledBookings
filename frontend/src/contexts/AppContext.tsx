@@ -40,7 +40,7 @@ export const AppContextProvider = ({ children }: {children: React.ReactNode}) =>
       showToast: (toastMessage) => {setToast(toastMessage)},
       isLoggedIn: status,
     }}>
-      {toast && <Toast message={"hello"} type={"LOADING"} onClose={() => setToast(undefined)} />}
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(undefined)} />}
       {children}
     </AppContext.Provider>
   )

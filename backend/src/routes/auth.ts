@@ -66,13 +66,21 @@ router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
   res.status(200).send({ message: req.userId });
 });
 
-router.post("/logout", (req: Request, res: Response) => {
-  res.clearCookie("auth_token", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    maxAge: 86400000,
-  });
-  res.status(200).json({message: "Logged out succesfully"});
-});
+router.post("/logout",
+  async (req: Request, res: Response<{ message: string }>): Promise<Response> => {
+    try {
+      res.clearCookie("auth_token", {
+        httpOnly: true,
+        sameSite: "strict",
+        secure: process.env.NODE_ENV !== "development",
+      });
+      return res.status(200).json({ message: "Logged out successfully" });
+    } catch (error) {
+      console.error("Error in logout route:", error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+);
+
 
 export default router;

@@ -3,6 +3,7 @@ import { useAppContext } from "../contexts/AppContext";
 import { RiLoaderLine } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from "react";
+import SignOutButton from "./SignOut";
 
 
 
@@ -13,8 +14,12 @@ const Header = () => {
     const { isLoggedIn } = useAppContext();
     console.log("I am Header.tsx");
 
-    function handleHamburgerClick(){
+    function handleHamburgerClick(): void{
         setOpen(!open);
+    }
+
+    function handleSignOut(): void{
+
     }
 
     return (
@@ -49,7 +54,7 @@ const Header = () => {
                                             open && <div className="z-100 w-[150px] absolute right-0 top-full flex flex-col bg-white rounded-lg">
                                                 <Link to={"/my-bookings"} className="link-btn">My Bookings</Link>
                                                 <Link to={"/my-hotels"} className="link-btn">My Hotels</Link>
-                                                <button className="btn">Sign Out</button>
+                                                <SignOutButton />
                                             </div>
                                         }
                                     </div>  
@@ -57,7 +62,7 @@ const Header = () => {
                                    <div className="hidden lg:flex lg:space-x-2">
                                         <Link to={"/my-bookings"} className="btn">My Bookings</Link>
                                         <Link to={"/my-hotels"} className="btn">My Hotels</Link>
-                                        <button className="btn">Sign Out</button>
+                                        <SignOutButton />
                                     </div>
                                </>
                             )
