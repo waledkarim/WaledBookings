@@ -1,7 +1,8 @@
+
 const Footer = () => {
     return (
       // The bleeding container
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient py-4">
+      <div className="bg-gradient py-4 fixed bottom-0 right-0 left-0">
         <div className="container h-20 flex flex-col items-center justify-between lg:flex-row">
           <div className="text-xl text-white font-bold tracking-tight">
             MernHolidays.com

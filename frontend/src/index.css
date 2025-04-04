@@ -12,7 +12,7 @@
     }
 
     .input-label {
-        @apply text-gray-700 text-xs font-bold
+        @apply text-gray-700 text-sm font-medium
     }
 
     .btn-blue {
@@ -21,5 +21,13 @@
 
     .link-btn {
         @apply p-2 text-center rounded-lg
+    }
+
+    .link {
+        @apply underline text-blue-500
+    }
+
+    .form-heading {
+        @apply text-2xl font-semibold text-blue-500 py-3
     }
 }

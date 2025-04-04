@@ -5,14 +5,11 @@ import { body } from "express-validator";
 import { HotelType } from "../types/types";
 import cloudinary from 'cloudinary';
 import Hotel from "../models/hotel";
-import { Date } from "mongoose";
 
 const router = express.Router();
 
-
-const storage = multer.memoryStorage();
 const upload = multer({
-  storage: storage,
+  storage: multer.memoryStorage(),
   limits: {
     fileSize: 5 * 1024 * 1024, // 5MB
   },
@@ -52,28 +49,29 @@ router.post(
   
         const hotel = new Hotel(newHotel);
         await hotel.save();
-
-        return res.status(201).send(hotel);
+        
+        return res.status(201).send({ message: "Hotel created successfully" });
 
       } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Something went wrong" });
       }
     }
-  );
+);
 
-  async function uploadImages(imageFiles: Express.Multer.File[]) {
+async function uploadImages(imageFiles: Express.Multer.File[]) {
 
-    const uploadPromises = imageFiles.map(async (image) => {
-      const b64 = Buffer.from(image.buffer).toString("base64");
-      let dataURI = "data:" + image.mimetype + ";base64," + b64;
-      const res = await cloudinary.v2.uploader.upload(dataURI);
-      return res.url;
-    });
-  
-    const imageUrls = await Promise.all(uploadPromises);
-    return imageUrls;
-  }
+  const uploadPromises = imageFiles.map( async (image) => {
+    const b64 = Buffer.from(image.buffer).toString("base64");
+    let dataURI = "data:" + image.mimetype + ";base64," + b64;
+    const res = await cloudinary.v2.uploader.upload(dataURI);
+    return res.url;
+  });
+
+  const imageUrls = await Promise.all(uploadPromises);
+  return imageUrls;
+
+}
 
 
 

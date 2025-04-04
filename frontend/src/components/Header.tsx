@@ -20,7 +20,7 @@ const Header = () => {
 
     return (
         // The container that bleeds
-        <div className="fixed left-0 right-0 py-6 h-20">
+        <div className="fixed left-0 right-0 py-6 h-20 bg-gradient">
             {/* The container container */}
             <div className="container flex justify-between items-center">
                 {/* Brand Link */}
