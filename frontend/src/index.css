@@ -16,7 +16,7 @@
     }
 
     .btn-blue {
-        @apply bg-blue-600 text-white font-bold hover:bg-blue-500 p-2 rounded-lg
+        @apply bg-blue-600 text-white font-semibold hover:bg-blue-500 p-2 rounded-lg
     }
 
     .link-btn {
