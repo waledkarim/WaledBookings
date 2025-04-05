@@ -44,7 +44,7 @@ const SignIn = () => {
   });
 
   return (
-    <form className="min-h-[500px] flex flex-col gap-y-3 items-center" onSubmit={onSubmit}>
+    <form className="flex flex-col gap-y-3 md:items-center" onSubmit={onSubmit}>
       {/* Heading section */}
       <h2 className="form-heading">Sign In</h2>
       {/* Form section */}
@@ -54,7 +54,7 @@ const SignIn = () => {
             Email
             <input
               type="email"
-              className="border rounded w-full py-1 px-2 font-normal"
+              className="input"
               {...register("email", { required: "This field is required" })}
             />
             {
@@ -68,7 +68,7 @@ const SignIn = () => {
             Password
             <input
               type="password"
-              className="border rounded w-full py-1 px-2 font-normal"
+              className="input"
               {...register("password", {
                 required: "This field is required",
                 minLength: {

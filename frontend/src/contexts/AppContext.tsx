@@ -17,14 +17,11 @@ type AppContextType = {
   showToast: (toastMessage: ToastMessage) => void,
   isLoggedIn: QueryStatus,
 };
-console.log("Inside AppContext.tx");
 
 const AppContext = React.createContext<AppContextType | undefined>(undefined);
 
 //j shob components k AppContextProvider diye wrap korbo will have access to showToast.
 export const AppContextProvider = ({ children }: {children: React.ReactNode}) => {
-
-  console.log("AppContextProvider fn invoked");
 
   const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
 
@@ -32,8 +29,6 @@ export const AppContextProvider = ({ children }: {children: React.ReactNode}) =>
     retry: false,
     refetchOnWindowFocus: false,
   });
-
-  console.log("After useQuery");
 
   return (
     <AppContext.Provider value={{

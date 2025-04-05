@@ -18,7 +18,7 @@ const DetailsSection = () => {
         Name
         <input
           type="text"
-          className="border rounded w-full py-1 px-2 font-normal"
+          className="input"
           {...register("name", { required: "This field is required" })}
         ></input>
         {
@@ -33,7 +33,7 @@ const DetailsSection = () => {
             <label className="input-label md:flex-1">
               Country
               <input
-                className="border rounded w-full py-1 px-2 font-normal"
+                className="input"
                 {...register("country", { required: "This field is required" })}
               />
             {
@@ -45,7 +45,7 @@ const DetailsSection = () => {
             <label className="input-label md:flex-1">
               City
               <input
-                className="border rounded w-full py-1 px-2 font-normal"
+                className="input"
                 {...register("city", { required: "This field is required" })}
               />
             {
@@ -61,7 +61,7 @@ const DetailsSection = () => {
         Description
         <textarea
           rows={10}
-          className="border rounded w-full py-1 px-2 font-normal"
+          className="input"
           {...register("description", { required: "This field is required" })}
         ></textarea>
         {
@@ -77,7 +77,7 @@ const DetailsSection = () => {
         <input
           type="number"
           min={1}
-          className="border rounded w-full py-1 px-2 font-normal"
+          className="input"
           {...register("pricePerNight", { required: "This field is required" })}
         ></input>
         {
@@ -94,14 +94,14 @@ const DetailsSection = () => {
           {...register("starRating", {
             required: "This field is required",
           })}
-          className="border rounded w-full p-2 text-gray-700 font-normal"
+          className="input"
         >
           <option value="" className="text-sm font-bold">
             Select as Rating
           </option>
           {
-            [1, 2, 3, 4, 5].map((num) => (
-              <option value={num}>{num}</option>
+            [1, 2, 3, 4, 5].map((num, ind) => (
+              <option key={ind} value={num}>{num}</option>
             ))
           }
         </select>

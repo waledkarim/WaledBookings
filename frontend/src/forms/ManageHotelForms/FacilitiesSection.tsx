@@ -16,8 +16,8 @@ const FacilitiesSection = () => {
         {/* Checklist section */}
         <div className="flex flex-col gap-y-1 lg:grid lg:grid-cols-5 lg:gap-3">
             {
-              hotelFacilities.map((facility) => (
-                <label className="flex gap-1 text-gray-700">
+              hotelFacilities.map((facility, ind) => (
+                <label key={ind} className="flex gap-1 text-gray-700">
                     <input
                       type="checkbox"
                       value={facility}

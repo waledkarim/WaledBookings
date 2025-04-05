@@ -18,8 +18,9 @@ const TypeSection = () => {
 
       <div className="flex flex-col gap-y-3 lg:grid lg:grid-cols-5 lg:gap-2">
         {
-          hotelTypes.map((type) => (
+          hotelTypes.map((type, ind) => (
             <label
+              key={ind}
               className={
                 typeWatch === type
                   ? "cursor-pointer bg-blue-300 text-sm rounded-full px-4 py-2 font-semibold"

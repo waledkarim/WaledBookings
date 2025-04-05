@@ -5,9 +5,6 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools  } from "react-query/devtools"
 import { AppContextProvider } from './contexts/AppContext.tsx'
 
-console.log("Inside main.tsx");
-
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

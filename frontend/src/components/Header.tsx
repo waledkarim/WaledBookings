@@ -12,7 +12,6 @@ const Header = () => {
 
     const [open, setOpen] = useState<boolean>(false);
     const { isLoggedIn } = useAppContext();
-    console.log("I am Header.tsx");
 
     function handleHamburgerClick(): void{
         setOpen(!open);
@@ -47,9 +46,9 @@ const Header = () => {
                                     <div className="relative">
                                         <GiHamburgerMenu size={20} className="text-white cursor-pointer lg:hidden" onClick={handleHamburgerClick}/>
                                         {
-                                            open && <div className="z-100 w-[150px] absolute right-0 top-full flex flex-col bg-white rounded-lg">
+                                            open && <div onClick={() => setOpen(false)} className="z-100 w-[200px] absolute right-0 top-full flex flex-col bg-white rounded-lg shadow-md p-3">
                                                 <Link to={"/my-bookings"} className="link-btn">My Bookings</Link>
-                                                <Link to={"/my-hotels"} className="link-btn">My Hotels</Link>
+                                                <Link to={"/my-hotels"} className="link-btn mb-2">My Hotels</Link>
                                                 <SignOutButton />
                                             </div>
                                         }
