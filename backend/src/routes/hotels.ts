@@ -6,7 +6,9 @@ const router = express.Router();
 
 
 router.get("/search", async (req: Request, res: Response) => {
+
     try {
+      
       const query = constructSearchQuery(req.query);
   
       let sortOptions = {};
@@ -27,6 +29,7 @@ router.get("/search", async (req: Request, res: Response) => {
       const pageNumber = parseInt(
         req.query.page ? req.query.page.toString() : "1"
       );
+      
       const skip = (pageNumber - 1) * pageSize;
   
       const hotels = await Hotel.find(query)
@@ -46,6 +49,7 @@ router.get("/search", async (req: Request, res: Response) => {
       };
   
       res.json(response);
+      
     } catch (error) {
       console.log("error", error);
       res.status(500).json({ message: "Something went wrong" });

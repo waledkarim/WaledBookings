@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAppContext } from "../contexts/AppContext";
 import { RiLoaderLine } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -12,6 +12,7 @@ const Header = () => {
 
     const [open, setOpen] = useState<boolean>(false);
     const { isLoggedIn } = useAppContext();
+    const navigate = useNavigate();
 
     function handleHamburgerClick(): void{
         setOpen(!open);
@@ -19,7 +20,7 @@ const Header = () => {
 
     return (
         // The container that bleeds
-        <div className="fixed left-0 right-0 py-6 h-20 bg-gradient">
+        <div className="fixed left-0 right-0 py-6 h-20 bg-gradient z-40">
             {/* The container container */}
             <div className="container flex justify-between items-center">
                 {/* Brand Link */}
@@ -36,9 +37,9 @@ const Header = () => {
                         (
                             isLoggedIn === "error" ? 
                             (
-                                <Link to={"sign-in"} className="btn">
+                                <button onClick={() => navigate("sign-in")} className="btn">
                                     Sign in
-                                </Link>
+                                </button>
                             ):
                             (
                                 <>

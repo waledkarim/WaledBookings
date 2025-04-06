@@ -30,7 +30,7 @@ const DetailsSection = () => {
 
       {/* Country and City input fields */}
       <div className="flex flex-col md:flex-row gap-5">
-            <label className="input-label md:flex-1">
+            <label className="input-label flex-1">
               Country
               <input
                 className="input"
@@ -42,7 +42,7 @@ const DetailsSection = () => {
                 )
             }
             </label>
-            <label className="input-label md:flex-1">
+            <label className="input-label flex-1">
               City
               <input
                 className="input"

@@ -80,7 +80,7 @@ const ManageHotelForm = ({ hotel, onSave, isLoading }: Props) => {
 
     return (
         <FormProvider {...formMethods}>
-            <form className="flex flex-col mb-32 md:items-center" onSubmit={onSubmit}>
+            <form className="flex flex-col mb-10 md:items-center" onSubmit={onSubmit}>
                 <div className="flex flex-col max-w-[900px]">
                     <DetailsSection />
                     <TypeSection />

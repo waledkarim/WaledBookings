@@ -13,7 +13,7 @@ const GuestsSection = () => {
       {/* Heading Section */}
       <h2 className="form-heading">Guests</h2>
 
-      {/* Main section */}
+      {/* Adult and children input fieldds */}
       <div className="flex flex-col p-6 gap-5 bg-gray-300 lg:grid lg:grid-cols-2">
 
         {/* Adults input field */}
@@ -27,14 +27,16 @@ const GuestsSection = () => {
               required: "This field is required",
             })}
           />
-          {errors.adultCount?.message && (
-            <span className="text-red-500 text-sm fold-bold">
-              {errors.adultCount?.message}
-            </span>
-          )}
+          {
+            errors.adultCount?.message && (
+              <span className="text-red-500 text-sm fold-bold">
+                {errors.adultCount?.message}
+              </span>
+            )
+          }
         </label>
         {/* Children input field */}
-        <label className="text-gray-700 text-sm font-semibold">
+        <label className="input-label">
           Children
           <input
             className="border rounded w-full py-2 px-3 font-normal"
@@ -44,11 +46,13 @@ const GuestsSection = () => {
               required: "This field is required",
             })}
           />
-          {errors.childCount?.message && (
-            <span className="text-red-500 text-sm fold-bold">
-              {errors.childCount?.message}
-            </span>
-          )}
+          {
+            errors.childCount?.message && (
+              <span className="text-red-500 text-sm fold-bold">
+                {errors.childCount?.message}
+              </span>
+            )
+          }
         </label>
 
       </div>
