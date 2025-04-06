@@ -37,7 +37,7 @@ const SearchBar = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative z-50 -mt-4 p-3 bg-orange-400 rounded shadow-md flex flex-col gap-y-2 lg:flex-row lg:justify-between lg:gap-x-3"
+      className="relative p-3 bg-orange-400 rounded shadow-md flex flex-col gap-y-2 lg:flex-row lg:justify-between lg:gap-x-3"
     >
       {/* Where are you going input field */}
       <div className="flex items-center flex-1 bg-white p-2 rounded">

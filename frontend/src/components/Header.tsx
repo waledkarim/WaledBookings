@@ -20,7 +20,7 @@ const Header = () => {
 
     return (
         // The container that bleeds
-        <div className="fixed left-0 right-0 py-6 h-20 bg-gradient z-40">
+        <div className="fixed left-0 right-0 py-6 h-20 bg-gradient z-50">
             {/* The container container */}
             <div className="container flex justify-between items-center">
                 {/* Brand Link */}
@@ -47,7 +47,7 @@ const Header = () => {
                                     <div className="relative">
                                         <GiHamburgerMenu size={20} className="text-white cursor-pointer lg:hidden" onClick={handleHamburgerClick}/>
                                         {
-                                            open && <div onClick={() => setOpen(false)} className="z-100 w-[200px] absolute right-0 top-full flex flex-col bg-white rounded-lg shadow-md p-3">
+                                            open && <div onClick={() => setOpen(false)} className="w-[200px] absolute right-0 top-full flex flex-col bg-white rounded-lg shadow-md p-3">
                                                 <Link to={"/my-bookings"} className="link-btn">My Bookings</Link>
                                                 <Link to={"/my-hotels"} className="link-btn mb-2">My Hotels</Link>
                                                 <SignOutButton />

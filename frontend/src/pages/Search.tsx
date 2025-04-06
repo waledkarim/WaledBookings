@@ -123,7 +123,7 @@ const Search = () => {
           </button>
 
           {/* Filter section in large screens */}
-          <div className="hidden rounded-lg border border-slate-300 lg:block lg:p-5 lg:h-fit lg:sticky lg:top-20 lg:w-1/4">
+          <div className="hidden rounded-lg border border-slate-300 lg:block lg:p-5 lg:w-1/4">
 
               <div className="space-y-5">
                   <h3 className="text-lg font-semibold border-b border-slate-300 pb-5">
