@@ -166,7 +166,7 @@ const Search = () => {
                       <select
                         value={sortOption}
                         onChange={(event) => setSortOption(event.target.value)}
-                        className="w-full p-2 border rounded-md lg:w-auto"
+                        className="w-full p-2 border border-slate-400 rounded-md lg:w-auto"
                       >
                           <option value="">Sort By</option>
                           <option value="starRating">Star Rating</option>

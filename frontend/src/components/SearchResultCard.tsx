@@ -7,10 +7,10 @@ const SearchResultsCard = ({ hotel }: {hotel: HotelType}) => {
 
   return (
 
-    <div className="w-full border border-slate-300 rounded-lg p-3 lg:flex lg:gap-x-4">
+    <div className="w-full border border-slate-500 rounded-lg p-3 lg:flex lg:gap-x-4">
 
       {/* Image section */}
-      <div className="w-full h-[300px] lg:flex-1">
+      <div className="w-full h-[300px] lg:w-2/5">
         <img
           src={hotel.imageUrls[0]}
           className="w-full h-full object-cover object-center"
@@ -18,7 +18,7 @@ const SearchResultsCard = ({ hotel }: {hotel: HotelType}) => {
       </div>
 
       {/* Details section */}
-      <div className="flex flex-col gap-y-2 lg:justify-between lg:flex-[2]">
+      <div className="flex flex-col gap-y-2 lg:justify-between lg:w-3/5">
 
         {/* Hotel name and star rating section */}
         <div className=" py-2">
@@ -41,8 +41,8 @@ const SearchResultsCard = ({ hotel }: {hotel: HotelType}) => {
         </div>
 
         {/* Desc section */}
-        <div className="h-[150px] overflow-auto mb-4">
-          <div className="break-words">{hotel.description}</div>
+        <div className="h-[150px] overflow-y-auto mb-4">
+          <div className="break-words text-balance">{hotel.description}</div>
         </div>
 
         {/* Facilities, price and btn section */}
@@ -51,7 +51,7 @@ const SearchResultsCard = ({ hotel }: {hotel: HotelType}) => {
           <div className="flex gap-1 overflow-x-auto">
             {
               hotel.facilities.map((facility) => (
-                <span className="bg-slate-300 p-2 rounded-lg font-bold text-xs">
+                <span className="bg-slate-300 p-2 rounded-lg font-bold text-xs text-nowrap">
                   {facility}
                 </span>
               ))
