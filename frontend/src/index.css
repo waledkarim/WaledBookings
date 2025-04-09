@@ -4,7 +4,7 @@
 
 @layer utilities {
     .btn{
-        @apply flex justify-center items-center bg-white text-sm rounded-lg text-blue-600 font-semibold py-2 px-3 hover:bg-gray-100
+        @apply bg-white text-sm rounded-lg border border-slate-200 text-blue-600 font-semibold p-3 hover:bg-gray-100
     }
 
     .bg-gradient {
@@ -20,7 +20,7 @@
     }
 
     .link-btn {
-        @apply p-2 text-center rounded-lg shadow-sm hover:hover:bg-gray-100
+        @apply p-3 text-center rounded-lg border border-slate-200 hover:hover:bg-gray-100
     }
 
     .link {

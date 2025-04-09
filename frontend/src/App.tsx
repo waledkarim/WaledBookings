@@ -14,7 +14,6 @@ import Search from "./pages/Search";
 import SearchBar from "./components/SearchBar";
 import Detail from "./pages/Detail";
 import Booking from "./pages/Booking";
-import Hero from "./components/Hero";
 import MyBookings from "./pages/MyBookings";
 import Home from "./pages/Home";
 

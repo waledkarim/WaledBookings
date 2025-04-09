@@ -47,9 +47,9 @@ const Header = () => {
                                     <div className="relative">
                                         <GiHamburgerMenu size={20} className="text-white cursor-pointer lg:hidden" onClick={handleHamburgerClick}/>
                                         {
-                                            open && <div onClick={() => setOpen(false)} className="w-[200px] absolute right-0 top-full flex flex-col bg-white rounded-lg shadow-md p-3">
+                                            open && <div onClick={() => setOpen(false)} className="w-[200px] absolute right-0 top-full flex flex-col gap-y-2 bg-white rounded-lg shadow-md py-2">
                                                 <Link to={"/my-bookings"} className="link-btn">My Bookings</Link>
-                                                <Link to={"/my-hotels"} className="link-btn mb-2">My Hotels</Link>
+                                                <Link to={"/my-hotels"} className="link-btn">My Hotels</Link>
                                                 <SignOutButton />
                                             </div>
                                         }
