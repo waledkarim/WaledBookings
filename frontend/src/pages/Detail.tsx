@@ -98,7 +98,7 @@ const Detail = () => {
           </div>
 
           {/* Image section in large screens */}
-          <div className="hidden lg:grid lg:grid-cols-3 lg:gap-4">
+          <div className="hidden lg:w-full lg:overflow-x-auto lg:flex lg:justify-center lg:gap-4">
             {
               hotel.imageUrls.map((image) => (
                 <div className="h-[300px]">
@@ -107,17 +107,6 @@ const Detail = () => {
                     alt={hotel.name}
                     className="rounded-md w-full h-full object-cover object-center"
                   />
-                </div>
-              ))
-            }
-          </div>
-
-          {/* Facilities section */}
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
-            {
-              hotel.facilities.map((facility) => (
-                <div className="border border-slate-500 rounded-sm p-3">
-                  {facility}
                 </div>
               ))
             }
@@ -138,6 +127,17 @@ const Detail = () => {
               />
             </div>
 
+          </div>
+
+          {/* Facilities section */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
+            {
+              hotel.facilities.map((facility) => (
+                <div className="border border-slate-500 rounded-sm p-3">
+                  {facility}
+                </div>
+              ))
+            }
           </div>
 
         </div> :

@@ -37,7 +37,7 @@ const Header = () => {
                         (
                             isLoggedIn === "error" ? 
                             (
-                                <button onClick={() => navigate("sign-in")} className="btn">
+                                <button onClick={() => navigate("/sign-in")} className="btn">
                                     Sign in
                                 </button>
                             ):

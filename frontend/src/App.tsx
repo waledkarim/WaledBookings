@@ -13,6 +13,10 @@ import EditHotel from "./pages/EditHotel";
 import Search from "./pages/Search";
 import SearchBar from "./components/SearchBar";
 import Detail from "./pages/Detail";
+import Booking from "./pages/Booking";
+import Hero from "./components/Hero";
+import MyBookings from "./pages/MyBookings";
+import Home from "./pages/Home";
 
 const App = () => {
 
@@ -25,7 +29,7 @@ const App = () => {
           <Route path="/" element={
             <Layout>
               <SearchBar />
-              <p>HomePage</p>
+              <Home />
             </Layout>
           } 
           />
@@ -73,6 +77,19 @@ const App = () => {
         />
 
         <Route
+          path="/hotel/:hotelId/booking"
+          element={
+            isLoggedIn === "success" ? 
+            <Layout>
+              <Booking />
+            </Layout> :
+            <Layout>
+              <p>HomePage</p>
+            </Layout>
+          }
+        />
+
+        <Route
         path="/edit-hotel/:hotelId"
         element={
           isLoggedIn === "success" ? 
@@ -91,6 +108,19 @@ const App = () => {
           isLoggedIn === "success" ? 
             <Layout>
                 <MyHotels />
+            </Layout> :
+            <Layout>
+              <p>HomePage</p>
+            </Layout>
+        }
+        />
+
+        <Route
+        path="/my-bookings"
+        element={
+          isLoggedIn === "success" ? 
+            <Layout>
+                <MyBookings />
             </Layout> :
             <Layout>
               <p>HomePage</p>
