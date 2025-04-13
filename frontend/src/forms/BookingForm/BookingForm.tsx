@@ -4,9 +4,7 @@ import {
   UserType,
 } from "../../../../backend/src/types/types";
 import { useSearchContext } from "../../contexts/SearchContext";
-import { useNavigate, useParams } from "react-router-dom";
-import { useMutation } from "react-query";
-import * as apiClient from "../../api-client";
+import { useParams } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 type Props = {
