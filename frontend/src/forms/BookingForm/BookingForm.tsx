@@ -1,16 +1,20 @@
 import { useForm } from "react-hook-form";
 import {
+  HotelType,
   UserType,
 } from "../../../../backend/src/types/types";
-
 import { useSearchContext } from "../../contexts/SearchContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "react-query";
 import * as apiClient from "../../api-client";
-import { useAppContext } from "../../contexts/AppContext";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 type Props = {
-  currentUser: UserType;
+  currentUser: UserType,
+  numberOfNights: number,
+  hotel: HotelType,
+  paymentURL: string,
+  isLoading: boolean
 };
 
 export type BookingFormData = {
@@ -22,29 +26,14 @@ export type BookingFormData = {
   checkIn: string;
   checkOut: string;
   hotelId: string;
-  paymentIntentId: string;
   totalCost: number;
 };
 
-const BookingForm = ({ currentUser }: Props) => {
+const BookingForm = ({ currentUser, numberOfNights, hotel, isLoading, paymentURL }: Props) => {
 
 
   const search = useSearchContext();
   const { hotelId } = useParams();
-
-  const { showToast } = useAppContext();
-
-  const { mutate, isLoading } = useMutation(
-    apiClient.createRoomBooking,
-    {
-      onSuccess: () => {
-        showToast({ message: "Booking Saved!", type: "SUCCESS" });
-      },
-      onError: () => {
-        showToast({ message: "Error saving booking", type: "ERROR" });
-      },
-    }
-  );
 
   const { handleSubmit, register } = useForm<BookingFormData>({
     defaultValues: {
@@ -56,13 +45,12 @@ const BookingForm = ({ currentUser }: Props) => {
       checkIn: search.checkIn.toISOString(),
       checkOut: search.checkOut.toISOString(),
       hotelId: hotelId,
-    //   totalCost: ,
-    //   paymentIntentId: ,
     },
   });
 
   const onSubmit = async (formData: BookingFormData) => {
-    //Do payment confirmations and once succeeds, send the booking info, bookRoom({ ...formData, paymentIntentId: result.paymentIntent.id }) this comes from useMutation;
+    localStorage.setItem("pendingBooking", JSON.stringify(formData));
+    window.location.href = paymentURL;
   };
 
   return (
@@ -113,24 +101,25 @@ const BookingForm = ({ currentUser }: Props) => {
         <h2 className="text-xl font-semibold">Your Price Summary</h2>
 
         <div className="bg-blue-200 p-4 rounded-md">
-          <div className="font-semibold text-lg border border-black">
-            {/* Total Cost: £{paymentIntent.totalCost.toFixed(2)} */}
+          <div className="font-semibold text-lg">
+              BDT&nbsp;
+              {
+                numberOfNights * hotel?.pricePerNight
+              }
           </div>
           <div className="text-xs">Includes taxes and charges</div>
         </div>
       </div>
 
-      <div className="space-y-2 border border-black">
-        <h3 className="text-xl font-semibold">Payment Details</h3>
-      </div>
-
       <div className="flex justify-center">
         <button
-          // disabled={isLoading}
+          disabled={isLoading}
           type="submit"
           className="btn-blue"
         >
-           Confirm Booking
+           {
+            isLoading ? <AiOutlineLoading3Quarters className="w-full animate-spin"/> : "Confirm Booking"
+           }
         </button>
       </div>
     </form>

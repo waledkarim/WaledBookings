@@ -85,7 +85,7 @@ const SignIn = () => {
               )
             }
           </label>
-          {/* Not registered link */}
+          {/* Not registered link and btn */}
           <div className="flex flex-col items-center justify-between gap-y-10">
             <span className="text-sm">
               Not Registered?{" "}

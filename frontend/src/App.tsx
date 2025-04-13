@@ -16,6 +16,9 @@ import Detail from "./pages/Detail";
 import Booking from "./pages/Booking";
 import MyBookings from "./pages/MyBookings";
 import Home from "./pages/Home";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentFailed from "./pages/PaymentFailed";
+import PaymentCancelled from "./pages/PaymentCancelled";
 
 const App = () => {
 
@@ -32,6 +35,10 @@ const App = () => {
             </Layout>
           } 
           />
+
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/payment-failed" element={<PaymentFailed />} />
+        <Route path="/payment-cancelled" element={<PaymentCancelled />} />
 
           <Route path="/search" element={
             <Layout>

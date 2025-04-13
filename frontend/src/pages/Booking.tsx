@@ -5,16 +5,19 @@ import { useSearchContext } from "../contexts/SearchContext";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import BookingDetailsSummary from "../components/BookingDetailsSummary";
-
+import {v4 as uuidv4} from 'uuid';
 
 const Booking = () => {
 
   const search = useSearchContext();
   const { hotelId } = useParams();
-
+  const BASE_URL = window.location.origin;
   const [numberOfNights, setNumberOfNights] = useState<number>(0);
 
+  console.log(BASE_URL);
+
   useEffect(() => {
+
     if (search.checkIn && search.checkOut) {
       const nights =
         Math.abs(search.checkOut.getTime() - search.checkIn.getTime()) /
@@ -22,32 +25,35 @@ const Booking = () => {
 
       setNumberOfNights(Math.ceil(nights));
     }
+
   }, [search.checkIn, search.checkOut]);
 
-
-  // const { data: paymentIntentData } = useQuery(
-  //   "createPaymentIntent",
-  //   () =>
-  //     apiClient.createPaymentIntent(
-  //       hotelId as string,
-  //       numberOfNights.toString()
-  //     ),
-  //   {
-  //     enabled: !!hotelId && numberOfNights > 0,
-  //   }
-  // );
-
-  const { data: hotel } = useQuery(
-    "fetchHotelByID",
+  const { data: hotel } = useQuery("fetchHotelByID",
     () => apiClient.fetchHotelById(hotelId as string),
     {
       enabled: !!hotelId,
     }
   );
 
-  const { data: currentUser } = useQuery(
-    "fetchCurrentUser",
+  const { data: currentUser } = useQuery("fetchCurrentUser",
     apiClient.fetchCurrentUser
+  );
+
+  const {data: paymentURL, isLoading} = useQuery("fetchPaymentURL",
+    () => apiClient.fetchPaymentURL(
+      {
+        tran_id: `waled-${uuidv4()}`,
+        success_url: `${BASE_URL}/payment-success`,
+        fail_url: `${BASE_URL}/payment-failed`,
+        cancel_url: `${BASE_URL}/payment-cancelled`,
+        amount: 10,
+        cus_name: currentUser?.firstName as string,
+        cus_email: currentUser?.email as string,
+      },
+    ),
+    {
+      enabled: !!currentUser
+    }
   );
 
   if (!hotel) {
@@ -67,13 +73,19 @@ const Booking = () => {
       />
 
       {
-        currentUser  && (
+        currentUser  && 
+          paymentURL &&
+            paymentURL.result === "true" ? (
 
               <BookingForm
+                hotel={hotel}
+                numberOfNights={numberOfNights}
                 currentUser={currentUser}
+                paymentURL={paymentURL.payment_url}
+                isLoading={isLoading}
               />
 
-          )
+          ) : "Nothing to show"
       }
       
     </div>

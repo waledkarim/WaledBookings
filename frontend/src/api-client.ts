@@ -242,3 +242,42 @@ export const fetchHotels = async (): Promise<HotelType[]> => {
   return response.json();
 };
 
+//Get the URL for payment
+export type PaymentRequestBody = {
+
+  tran_id: string,
+  success_url: string,
+  fail_url: string,
+  cancel_url: string,
+  amount: number,
+  cus_name: string,
+  cus_email: string,
+
+}
+
+type PaymentResponseBody = {
+  result: string,
+  payment_url: string
+}
+
+export const fetchPaymentURL = async (paymentInfo: PaymentRequestBody): Promise<PaymentResponseBody> => {
+  const response = await fetch(`https://​sandbox​.aamarpay.com/jsonpost.php`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        store_id: "aamarpaytest",
+        signature_key: "dbb74894e82415a2f7ff0ec3a97e4183",
+        currency: "BDT",
+        desc: "Merchant Registration Payment",
+        cus_phone: "+8801902706272",
+        type: "json",
+        ...paymentInfo
+      })
+    }
+  );
+  if (!response.ok) {
+    throw new Error("");
+  }
+  return response.json();
+}
+
