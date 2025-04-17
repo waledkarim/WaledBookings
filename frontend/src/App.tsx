@@ -36,10 +36,6 @@ const App = () => {
           } 
           />
 
-        <Route path="/payment-success" element={<PaymentSuccess />} />
-        <Route path="/payment-failed" element={<PaymentFailed />} />
-        <Route path="/payment-cancelled" element={<PaymentCancelled />} />
-
           <Route path="/search" element={
             <Layout>
               <SearchBar />
@@ -77,7 +73,7 @@ const App = () => {
               <AddHotel />
             </Layout> :
             <Layout>
-              <p>HomePage</p>
+              <Home />
             </Layout>
           }
         />
@@ -90,7 +86,7 @@ const App = () => {
               <Booking />
             </Layout> :
             <Layout>
-              <p>HomePage</p>
+              <Home />
             </Layout>
           }
         />
@@ -103,7 +99,7 @@ const App = () => {
               <EditHotel />
             </Layout> :
             <Layout>
-              <p>HomePage</p>
+              <Home />
             </Layout>
         }
         />
@@ -116,7 +112,7 @@ const App = () => {
                 <MyHotels />
             </Layout> :
             <Layout>
-              <p>HomePage</p>
+              <Home />
             </Layout>
         }
         />
@@ -129,10 +125,14 @@ const App = () => {
                 <MyBookings />
             </Layout> :
             <Layout>
-              <p>HomePage</p>
+              <Home />
             </Layout>
         }
         />
+
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/payment-failed" element={<PaymentFailed />} />
+        <Route path="/payment-cancelled" element={<PaymentCancelled />} />
 
         <Route path="*" element={<Navigate to={"/"} />} />
 
