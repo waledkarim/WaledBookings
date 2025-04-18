@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
-import { useSearchContext } from "../../contexts/SearchContext";
 import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useBookingContext } from "../../contexts/BookingContext";
+import { HotelType } from "../../../../backend/src/types/types";
 
 type Props = {
-  hotelId: string;
+  hotel: HotelType;
   pricePerNight: number;
 };
 
@@ -16,13 +17,12 @@ type GuestInfoFormData = {
   childCount: number;
 };
 
-const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
+const GuestInfoForm = ({ hotel, pricePerNight }: Props) => {
   
-  const search = useSearchContext();
+  const booking = useBookingContext();
   const { isLoggedIn } = useAppContext();
   const navigate = useNavigate();
   const location = useLocation();
-
   const {
     watch,
     register,
@@ -31,51 +31,70 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
     formState: { errors },
   } = useForm<GuestInfoFormData>({
     defaultValues: {
-      checkIn: search.checkIn,
-      checkOut: search.checkOut,
-      adultCount: search.adultCount,
-      childCount: search.childCount,
-    },
+      checkIn: booking.checkIn,
+      checkOut: booking.checkOut,
+      adultCount: booking.adultsCount,
+      childCount: booking.childCount
+    }
   });
-
   const checkIn = watch("checkIn");
   const checkOut = watch("checkOut");
-
   const minDate = new Date();
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
+  const totalNoOfNights = Math.ceil(Math.abs((new Date(checkOut)).getTime() - (new Date(checkIn)).getTime()) / (1000 * 60 * 60 * 24));
+  const totalPrice = Number(pricePerNight * totalNoOfNights);
+
 
   const onSignInClick = (data: GuestInfoFormData) => {
-    search.saveSearchValues(
-      "",
+
+    booking.saveBookingValues(
+      totalPrice,
+      totalNoOfNights,
+      data.adultCount,
       data.checkIn,
       data.checkOut,
-      data.adultCount,
-      data.childCount
+      data.childCount,
+      hotel.name,
+      hotel.city,
+      hotel.country
     );
     navigate("/sign-in", { state: { from: location } });
+
   };
 
   const onSubmit = (data: GuestInfoFormData) => {
-    search.saveSearchValues(
-      "",
+
+    booking.saveBookingValues(
+      totalPrice,
+      totalNoOfNights,
+      data.adultCount,
       data.checkIn,
       data.checkOut,
-      data.adultCount,
-      data.childCount
+      data.childCount,
+      hotel.name,
+      hotel.city,
+      hotel.country
     );
-    navigate(`/hotel/${hotelId}/booking`);
+    navigate(`/hotel/${hotel._id}/booking`);
+
   };
 
   return (
     <div className="flex flex-col p-4 bg-blue-200 gap-4">
-      <h3 className="text-md font-bold">£{pricePerNight}</h3>
+
+      {/* Price heading */}
+      <h3 className="text-md font-bold">BDT {pricePerNight}</h3>
+
+      {/* The actual form */}
       <form
         onSubmit={
           isLoggedIn === "success" ? handleSubmit(onSubmit) : handleSubmit(onSignInClick)
         }
       >
         <div className="grid grid-cols-1 gap-4 items-center">
+
+          {/* CheckIn section */}
           <div>
             <DatePicker
               required
@@ -91,6 +110,8 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               wrapperClassName="min-w-full"
             />
           </div>
+
+          {/* CheckOut section */}
           <div>
             <DatePicker
               required
@@ -106,6 +127,8 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               wrapperClassName="min-w-full"
             />
           </div>
+
+          {/* Adults section */}
           <div className="flex bg-white px-2 py-1 gap-2">
             <label className="items-center flex">
               Adults:
@@ -144,6 +167,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               )
             }
           </div>
+
           {
             isLoggedIn === "success" ? (
               <button className="bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
@@ -155,8 +179,10 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               </button>
             )
           }
+
         </div>
       </form>
+      
     </div>
   );
 };

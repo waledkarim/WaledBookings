@@ -242,42 +242,46 @@ export const fetchHotels = async (): Promise<HotelType[]> => {
   return response.json();
 };
 
-//Get the URL for payment
-export type PaymentRequestBody = {
+// type SSLCommerzSessionResponse = {
+//   status: string,
+//   failedreason: string,
+//   sessionkey: string,
+//   gw: string,
+//   GatewayPageURL: string,
+//   storeBanner: string,
+//   storeLogo: string,
+//   desc: Array<string>,
+// }
 
-  tran_id: string,
-  success_url: string,
-  fail_url: string,
-  cancel_url: string,
-  amount: number,
-  cus_name: string,
-  cus_email: string,
-
+type BookingDataType = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  adultCount: number;
+  childCount: number;
+  checkIn: string;
+  checkOut: string;
+  totalCost: number;
 }
 
-type PaymentResponseBody = {
-  result: string,
-  payment_url: string
-}
+export const getPaymentURL = async (bookingData: BookingDataType): Promise<string> => {
 
-export const fetchPaymentURL = async (paymentInfo: PaymentRequestBody): Promise<PaymentResponseBody> => {
-  const response = await fetch(`https://​sandbox​.aamarpay.com/jsonpost.php`,
+  const response = await fetch(`${API_BASE_URL}/api/payments`,
     {
       method: "POST",
-      body: JSON.stringify({
-        store_id: "aamarpaytest",
-        signature_key: "dbb74894e82415a2f7ff0ec3a97e4183",
-        currency: "BDT",
-        desc: "Merchant Registration Payment",
-        cus_phone: "+8801902706272",
-        type: "json",
-        ...paymentInfo
-      })
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(bookingData),
     }
   );
-  if (!response.ok) {
-    throw new Error("");
+
+  if(!response.ok){
+    throw new Error("Could not create a SSLCommerz session");
   }
+
   return response.json();
+
 }
 

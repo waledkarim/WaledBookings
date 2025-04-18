@@ -5,7 +5,7 @@ import { HotelType } from "../types/types";
 
 const router = express.Router();
 
-// /api/my-bookings
+// Get all the bookings of the user.
 router.get("/", verifyToken, async (req: Request, res: Response) => {
   try {
     const hotels = await Hotel.find({

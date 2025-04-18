@@ -19,6 +19,7 @@ import Home from "./pages/Home";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentFailed from "./pages/PaymentFailed";
 import PaymentCancelled from "./pages/PaymentCancelled";
+import { BookingContextProvider } from "./contexts/BookingContext";
 
 const App = () => {
 
@@ -83,7 +84,9 @@ const App = () => {
           element={
             isLoggedIn === "success" ? 
             <Layout>
-              <Booking />
+              <BookingContextProvider>
+                <Booking />
+              </BookingContextProvider>
             </Layout> :
             <Layout>
               <Home />
