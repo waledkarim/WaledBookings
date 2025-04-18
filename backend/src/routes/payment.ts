@@ -7,7 +7,7 @@ import Hotel from "../models/hotel";
 const router = express.Router();
 const store_id = "wedwe6800b678e9d36";
 const store_password = "wedwe6800b678e9d36@ssl"
-const BASE_URL = "localhost:7000"
+const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:7000" : ""
 
 
 type RequestBody = {
@@ -46,9 +46,9 @@ router.post("/", verifyToken,
                 cus_phone: '01902706272',
 
                 tran_id: `${tran_id}`,
-                success_url: `http://${BASE_URL}/api/payments/success?firstName=${firstName}&lastName=${lastName}&email=${email}&adultCount=${adultCount}&childCount=${childCount}&checkIn=${checkIn}&checkOut=${checkOut}&userId=${req.userId}&totalCost=${totalCost}&hotelId=${hotelId}`,
-                fail_url: `http://${BASE_URL}/api/payments/fail`,
-                cancel_url: `http://${BASE_URL}/api/payments/cancel`,
+                success_url: `${BASE_URL}/api/payments/success?firstName=${firstName}&lastName=${lastName}&email=${email}&adultCount=${adultCount}&childCount=${childCount}&checkIn=${checkIn}&checkOut=${checkOut}&userId=${req.userId}&totalCost=${totalCost}&hotelId=${hotelId}`,
+                fail_url: `${BASE_URL}/api/payments/fail`,
+                cancel_url: `${BASE_URL}/api/payments/cancel`,
                 total_amount: totalCost,
                 cus_name: firstName + lastName,
                 cus_email: email,
@@ -100,7 +100,7 @@ router.post("/success",
             }
 
             await hotel.save();
-            res.redirect(`http://localhost:5173/payment-success`);
+            res.redirect(`${BASE_URL}/payment-success`);
         
     } catch (error) {
         console.log(error);
@@ -113,13 +113,13 @@ router.post("/success",
 
 router.post("/fail",
      (req: Request, res: Response) => {
-        res.redirect(`http://localhost:5173/payment-failed`);
+        res.redirect(`${BASE_URL}/payment-failed`);
      }
 )
 
 router.post("/cancel",
      (req: Request, res: Response) => {
-        res.redirect(`http://localhost:5173/payment-cancelled`);
+        res.redirect(`${BASE_URL}/payment-cancelled`);
      }
 )
 

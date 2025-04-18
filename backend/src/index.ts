@@ -13,9 +13,6 @@ import path from "path";
 
 
 const PORT = 7000;
-console.log(window.location.origin);
-
-
 const app = express();
 app.use(express.json()); //to parse JSON payloads
 app.use(express.urlencoded({extended: true})); //to parse URL-encoded payloads
