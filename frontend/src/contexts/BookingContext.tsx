@@ -81,10 +81,10 @@ export const BookingContextProvider = ({ children }: {children: React.ReactNode}
         setHotelName(hotelName);
         sessionStorage.setItem("hotelName", hotelName);
 
-        setHotelName(hotelCity);
+        setHotelCity(hotelCity);
         sessionStorage.setItem("hotelCity", hotelCity);
 
-        setHotelName(hotelCountry);
+        setHotelCountry(hotelCountry);
         sessionStorage.setItem("hotelCountry", hotelCountry);
 
     }
