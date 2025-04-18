@@ -9,6 +9,7 @@ const store_id = "wedwe6800b678e9d36";
 const store_password = "wedwe6800b678e9d36@ssl"
 const BASE_URL = "localhost:7000"
 
+
 type RequestBody = {
     firstName: string;
     lastName: string;
@@ -108,6 +109,18 @@ router.post("/success",
 
 }
 
+)
+
+router.post("/fail",
+     (req: Request, res: Response) => {
+        res.redirect(`http://localhost:5173/payment-failed`);
+     }
+)
+
+router.post("/cancel",
+     (req: Request, res: Response) => {
+        res.redirect(`http://localhost:5173/payment-cancelled`);
+     }
 )
 
 
