@@ -1,42 +1,42 @@
-import { FormEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useSearchContext } from "../contexts/SearchContext";
 import { MdTravelExplore } from "react-icons/md";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   
   const navigate = useNavigate();
   const search = useSearchContext();
+  const location = useLocation();
 
   const [destination, setDestination] = useState<string>(search.destination);
-  const [checkIn, setCheckIn] = useState<Date>(search.checkIn);
-  const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
-  const [adultCount, setAdultCount] = useState<number>(search.adultCount);
-  const [childCount, setChildCount] = useState<number>(search.childCount);
 
-  console.log("destination: "+destination, "checkIn: " +checkIn, "checkOut: " +checkOut, "adultCount: " +adultCount, "childCount: " +childCount);
+  // const handleSubmit = (event: FormEvent) => {
 
-  const handleSubmit = (event: FormEvent) => {
+  //   event.preventDefault();
+  //   search.saveSearchValues(
+  //     destination,
+  //   );
+  //   navigate("/search");
+
+  // };
+
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+
     event.preventDefault();
-    search.saveSearchValues(
-      destination,
-      checkIn,
-      checkOut,
-      adultCount,
-      childCount
-    );
-    navigate("/search");
-  };
+    setDestination(event.target.value);
+    search.saveSearchValues(event.target.value);
+    if(location.pathname !== "/search"){
+      navigate("/search");
+    }
 
-  const minDate = new Date();
-  const maxDate = new Date();
-  maxDate.setFullYear(maxDate.getFullYear() + 1);
+  }
 
   return (
     <form
-      onSubmit={handleSubmit}
+      // onSubmit={handleSubmit}
       className="relative p-3 bg-orange-400 rounded shadow-md flex flex-col gap-y-2 lg:flex-row lg:justify-between lg:gap-x-3"
     >
       {/* Where are you going input field */}
@@ -46,12 +46,12 @@ const SearchBar = () => {
           placeholder="Where are you going?"
           className="text-md w-full focus:outline-none"
           value={destination}
-          onChange={(event) => setDestination(event.target.value)}
+          onChange={handleSearchChange}
         />
       </div>
 
       {/* Adults and children input field */}
-      <div className="flex bg-white px-2 py-1 rounded">
+      {/* <div className="flex bg-white px-2 py-1 rounded">
         <label className="items-center flex">
           Adults:
           <input
@@ -74,10 +74,10 @@ const SearchBar = () => {
             onChange={(event) => setChildCount(parseInt(event.target.value))}
           />
         </label>
-      </div>
+      </div> */}
 
       {/* Check-in input field */}
-      <div className="">
+      {/* <div className="">
         <DatePicker
           selected={checkIn}
           onChange={(date) => setCheckIn(date as Date)}
@@ -91,10 +91,10 @@ const SearchBar = () => {
           className="min-w-full bg-white p-2 focus:outline-none rounded"
           wrapperClassName="min-w-full"
         />
-      </div>
+      </div> */}
 
       {/* Check-out input field */}
-      <div className="">
+      {/* <div className="">
         <DatePicker
           selected={checkOut}
           onChange={(date) => setCheckOut(date as Date)}
@@ -108,17 +108,14 @@ const SearchBar = () => {
           className="min-w-full bg-white p-2 focus:outline-none rounded"
           wrapperClassName="min-w-full"
         />
-      </div>
+      </div> */}
 
-      {/* Buttons */}
-      <div className="flex gap-x-1">
-        <button className="btn-blue w-2/3 lg:w-auto">
+      {/* Button */}
+      {/* <div className="flex gap-x-1">
+        <button type="submit" className="btn-blue w-full lg:w-auto">
           Search
         </button>
-        <button className="w-1/3 lg:w-auto bg-red-600 text-white rounded-lg p-2 font-semibold hover:bg-red-500">
-          Clear
-        </button>
-      </div>
+      </div> */}
 
     </form>
   );

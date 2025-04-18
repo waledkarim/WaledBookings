@@ -4,12 +4,6 @@ import * as apiClient from "../api-client";
 import { useState } from "react";
 import SearchResultCard from "../components/SearchResultCard";
 import SearchResultCardSkeleton from "../components/skeletons/SearchResultCardSkeleton";
-// import SearchResultsCard from "../components/SearchResultsCard";
-// import Pagination from "../components/Pagination";
-// import StarRatingFilter from "../components/StarRatingFilter";
-// import HotelTypesFilter from "../components/HotelTypesFilter";
-// import FacilitiesFilter from "../components/FacilitiesFilter";
-// import PriceFilter from "../components/PriceFilter";
 import { FaFilter } from "react-icons/fa";
 import SpecialContainer from "../components/SpecialContainer";
 import Pagination from "../components/Pagination";
@@ -30,11 +24,11 @@ const Search = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   const searchParams = {
-    destination: search.destination,
-    checkIn: search.checkIn.toISOString(),
-    checkOut: search.checkOut.toISOString(),
-    adultCount: search.adultCount.toString(),
-    childCount: search.childCount.toString(),
+    destination: search.destination || "",
+    // checkIn: search.checkIn.toISOString(),
+    // checkOut: search.checkOut.toISOString(),
+    // adultCount: search.adultCount.toString(),
+    // childCount: search.childCount.toString(),
     page: page.toString(),
     stars: selectedStars,
     types: selectedHotelTypes,
@@ -43,8 +37,8 @@ const Search = () => {
     sortOption,
   };
 
-  const { data: hotelData, isFetching } = useQuery(["searchHotels", searchParams], () =>
-    apiClient.searchHotels(searchParams)
+  const { data: hotelData, isFetching } = useQuery(["searchHotels", searchParams], 
+    () => apiClient.searchHotels(searchParams)
   );
 
   const handleStarsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -156,6 +150,7 @@ const Search = () => {
               <div className="w-full flex flex-col gap-y-2 lg:w-3/4">
 
                   <div className="lg:flex lg:justify-between lg:items-center">
+
                       {/* Results heading */}
                       <div className="text-lg font-bold">
                           {hotelData.pagination.total} Hotels found

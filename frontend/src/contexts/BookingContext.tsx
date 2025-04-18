@@ -38,7 +38,6 @@ export const BookingContextProvider = ({ children }: {children: React.ReactNode}
         () => sessionStorage.getItem("hotelCountry") || ""
     );
     
-
     const [totalPrice, setTotalPrice] = useState<number>(
         () => Number(sessionStorage.getItem("totalPrice")) || 0
     );

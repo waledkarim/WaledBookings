@@ -61,14 +61,14 @@ const BookingForm = () => {
   }, [isSuccess, currentUser, booking]);
 
   const {mutate, isLoading: isConfirmBookingLoading} = useMutation(apiClient.getPaymentURL, {
+
     onSuccess: (paymentGatewayURL) => {
-      // console.log(data);
-      booking.removeBookingValues();
       window.location.href = paymentGatewayURL;
     },
     onError: () => {
       showToast({message: "An error occured for SSLCommerz", type: "ERROR"});
     },
+    
   })
 
   const onSubmit = async (formData: BookingFormData) => {
