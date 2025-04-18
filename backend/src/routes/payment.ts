@@ -6,8 +6,8 @@ import Hotel from "../models/hotel";
 
 const router = express.Router();
 const store_id = "wedwe6800b678e9d36";
-const store_password = "wedwe6800b678e9d36@ssl"
-const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:7000" : ""
+const store_password = "wedwe6800b678e9d36@ssl";
+const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:7000" : "http://waledbookings.onrender.com";
 
 
 type RequestBody = {
