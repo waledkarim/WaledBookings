@@ -30,11 +30,11 @@ const BookingDetailsSummary = () => {
       <div className="flex flex-col gap-3 lg:justify-between">
         <div>
           <h6>Check-in</h6>
-          <div className="font-bold"> {checkIn.toDateString()}</div>
+          <div className="font-bold"> {checkIn?.toDateString()}</div>
         </div>
         <div>
           <h6>Check-out</h6>
-          <div className="font-bold"> {checkOut.toDateString()}</div>
+          <div className="font-bold"> {checkOut?.toDateString()}</div>
         </div>
       </div>
 
