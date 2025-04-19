@@ -253,7 +253,7 @@ export const fetchHotels = async (): Promise<HotelType[]> => {
 //   desc: Array<string>,
 // }
 
-type BookingDataType = {
+export type BookingDataType = {
   firstName: string;
   lastName: string;
   email: string;

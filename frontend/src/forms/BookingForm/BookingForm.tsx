@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useAppContext } from "../../contexts/AppContext";
 import { useParams } from "react-router-dom";
+import { BookingDataType } from "../../api-client";
 
 export type BookingFormData = {
   firstName: string;
@@ -16,7 +17,7 @@ export type BookingFormData = {
   childCount: number;
   checkIn: string;
   checkOut: string;
-  totalCost: number;
+  totalCost: number | undefined;
 };
 
 const BookingForm = () => {
@@ -39,8 +40,8 @@ const BookingForm = () => {
       email: currentUser?.email,
       adultCount: booking.adultsCount,
       childCount: booking.childCount,
-      checkIn: booking.checkIn.toISOString(),
-      checkOut: booking.checkOut.toISOString(),
+      checkIn: booking?.checkIn?.toISOString(),
+      checkOut: booking?.checkOut?.toISOString(),
     },
   });
 
@@ -53,8 +54,8 @@ const BookingForm = () => {
         email: currentUser.email,
         adultCount: booking.adultsCount,
         childCount: booking.childCount,
-        checkIn: booking.checkIn.toISOString(),
-        checkOut: booking.checkOut.toISOString(),
+        checkIn: booking?.checkIn?.toISOString(),
+        checkOut: booking?.checkOut?.toISOString(),
       });
     }
 
@@ -76,7 +77,7 @@ const BookingForm = () => {
     formData.totalCost = totalPrice;
     formData.hotelId = hotelId as string;
     console.log("formData after confirm booking: ", formData);
-    mutate(formData);
+    mutate(formData as BookingDataType);
 
   };
 
@@ -179,7 +180,7 @@ const BookingForm = () => {
 
           <div className="bg-blue-200 p-4 rounded-md">
             <div className="font-semibold text-lg">
-                BDT {totalPrice.toLocaleString()}
+                BDT {totalPrice?.toLocaleString()}
             </div>
             <div className="text-xs">Includes taxes and charges</div>
           </div>
