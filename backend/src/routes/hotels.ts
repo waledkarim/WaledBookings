@@ -68,7 +68,6 @@ router.get("/search", async (req: Request, res: Response) => {
     }
 });
 
-
 router.get("/:hotelId",
   [
     param("hotelId").notEmpty().withMessage("Hotel ID is required"),
@@ -95,43 +94,36 @@ router.get("/:hotelId",
   }
 );
 
-
-// This endpoint is hit to confirm booking
-router.post("/:hotelId/bookings",
-  verifyToken,
+router.get("/:hotelId/unavailable-dates",
   async (req: Request, res: Response) => {
-    try {
 
-      const newBooking: BookingType = {
-        ...req.body,
-        userId: req.userId,
-      };
+  const { hotelId } = req.params;
 
+  try{
 
-      const hotel = await Hotel.findOneAndUpdate(
-        { _id: req.params.hotelId },
-        {
-          $push: { bookings: newBooking },
-        }
-      );
+    const hotel = await Hotel.findById(hotelId).select('bookings.checkIn bookings.checkOut');
 
-
-      if (!hotel) {
-        return res.status(400).json({ message: "Hotel not found" });
-      }
-
-
-      await hotel.save();
-      res.status(200).send({message: "Booking made successfully"});
-
-    } catch (error) {
-
-      console.log(error);
-      res.status(500).json({ message: "Something went wrong" });
-
+    if (!hotel) {
+      throw new Error('Hotel not found');
     }
+
+    const unavailableDates = hotel.bookings.map((booking: {checkIn: Date, checkOut: Date}) => ({
+      start: booking.checkIn,
+      end: booking.checkOut,
+    }));
+
+    res.status(200).json(unavailableDates);
+
+  }catch(error){
+    console.log(error);
+    res.status(500).json({message: error});
+  }
+
+
+
   }
 );
+
 
 
 const constructSearchQuery = (queryParams: any) => {

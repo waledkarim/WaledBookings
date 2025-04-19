@@ -285,3 +285,16 @@ export const getPaymentURL = async (bookingData: BookingDataType): Promise<strin
 
 }
 
+export type UnavailableBookingDatesType = {
+  start: Date,
+  end: Date,
+}
+
+export const getUnavailableBookingDates = async (hotelId: string): Promise<UnavailableBookingDatesType[]> => {
+
+  const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}/unavailable-dates`);
+  if(!response.ok) throw new Error("Error fetching the unavailable dates for this hotel");
+  return response.json();
+
+}
+

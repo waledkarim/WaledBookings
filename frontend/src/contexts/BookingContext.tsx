@@ -1,15 +1,15 @@
 import React, { useContext, useState } from "react"
 
 type BookingContext = {
-    totalPrice: number,
-    adultsCount: number,
-    checkIn: Date,
-    checkOut: Date
-    childCount: number
-    totalNumberOfNights: number,
-    hotelName: string,
-    hotelCity: string,
-    hotelCountry: string,
+    totalPrice: number | null,
+    adultsCount: number | null,
+    checkIn: Date | null,
+    checkOut: Date | null,
+    childCount: number | null
+    totalNumberOfNights: number | null,
+    hotelName: string | null,
+    hotelCity: string | null,
+    hotelCountry: string | null,
     removeBookingValues: () => void,
     saveBookingValues: (
         totalPrice: number,
@@ -28,62 +28,26 @@ const BookingContext = React.createContext<BookingContext | undefined>(undefined
 
 export const BookingContextProvider = ({ children }: {children: React.ReactNode}) => {
 
-    const [hotelName, setHotelName] = useState<string>(
-        () => sessionStorage.getItem("hotelName") || ""
-    );
-    const [hotelCity, setHotelCity] = useState<string>(
-        () => sessionStorage.getItem("hotelCity") || ""
-    );
-    const [hotelCountry, setHotelCountry] = useState<string>(
-        () => sessionStorage.getItem("hotelCountry") || ""
-    );
-    
-    const [totalPrice, setTotalPrice] = useState<number>(
-        () => Number(sessionStorage.getItem("totalPrice")) || 0
-    );
-    const [totalNumberOfNights, setTotalNumberOfNights] = useState<number>(
-        () => Number(sessionStorage.getItem("totalNumberOfNights")) || 0
-    );
-    const [adultsCount, setAdultsCount] = useState<number>(
-        () => Number(sessionStorage.getItem("adultsCount")) || 0
-    );
-    const [checkIn, setCheckIn] = useState<Date>(
-        () => new Date(sessionStorage.getItem("checkIn") || new Date())
-    );
-    const [checkOut, setCheckOut] = useState<Date>(
-        () => new Date(sessionStorage.getItem("checkOut") || new Date())
-    );
-    const [childCount, setChildCount] = useState<number>(
-        () => Number(sessionStorage.getItem("childCount")) || 0
-    );
+    const checkIn = sessionStorage.getItem("checkIn") ? new Date(sessionStorage.getItem("checkIn") as string) : null;
+    const totalPrice = Number(sessionStorage.getItem("totalPrice"));
+    const totalNumberOfNights = Number(sessionStorage.getItem("totalNumberOfNights"));
+    const adultsCount = Number(sessionStorage.getItem("adultsCount"));
+    const checkOut = sessionStorage.getItem("checkOut") ? new Date(sessionStorage.getItem("checkOut") as string) : null;
+    const childCount = Number(sessionStorage.getItem("childCount"));
+    const hotelName = sessionStorage.getItem("hotelName");
+    const hotelCity = sessionStorage.getItem("hotelCity");
+    const hotelCountry = sessionStorage.getItem("hotelCountry");
 
     const saveBookingValues = (totalPrice: number, totalNumberOfNights: number, adultsCount: number, checkIn: Date, checkOut: Date, childCount: number, hotelName: string, hotelCity: string, hotelCountry: string) => {
 
-        setTotalPrice(totalPrice);
         sessionStorage.setItem("totalPrice", totalPrice.toString());
-
-        setTotalNumberOfNights(totalNumberOfNights);
         sessionStorage.setItem("totalNumberOfNights", totalNumberOfNights.toString());
-
-        setAdultsCount(adultsCount);
         sessionStorage.setItem("adultsCount", adultsCount.toString());
-
-        setCheckIn(checkIn);
         sessionStorage.setItem("checkIn", checkIn.toISOString());
-
-        setCheckOut(checkOut);
         sessionStorage.setItem("checkOut", checkOut.toISOString());
-
-        setChildCount(childCount);
         sessionStorage.setItem("childCount", childCount.toString());
-
-        setHotelName(hotelName);
         sessionStorage.setItem("hotelName", hotelName);
-
-        setHotelCity(hotelCity);
         sessionStorage.setItem("hotelCity", hotelCity);
-
-        setHotelCountry(hotelCountry);
         sessionStorage.setItem("hotelCountry", hotelCountry);
 
     }
