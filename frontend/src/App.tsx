@@ -139,7 +139,11 @@ const App = () => {
           </BookingContextProvider>
           } />
         <Route path="/payment-failed" element={<PaymentFailed />} />
-        <Route path="/payment-cancelled" element={<PaymentCancelled />} />
+        <Route path="/payment-cancelled" element={
+          <BookingContextProvider>
+            <PaymentCancelled />
+          </BookingContextProvider>
+          } />
 
         <Route path="*" element={<Navigate to={"/"} />} />
 

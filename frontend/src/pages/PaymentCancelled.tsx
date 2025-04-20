@@ -1,7 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import { useBookingContext } from "../contexts/BookingContext";
 
 const PaymentCancelled = () => {
+
     const navigate = useNavigate();
+    const {removeBookingValues} = useBookingContext();
+    removeBookingValues();
   
     return (
       <div className="flex flex-col justify-center min-h-screen bg-yellow-50 p-5">

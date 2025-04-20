@@ -74,9 +74,9 @@ const BookingForm = () => {
 
   const onSubmit = async (formData: BookingFormData) => {
 
+    sessionStorage.setItem("hotelId", hotelId as string);
     formData.totalCost = totalPrice;
     formData.hotelId = hotelId as string;
-    console.log("formData after confirm booking: ", formData);
     mutate(formData as BookingDataType);
 
   };
