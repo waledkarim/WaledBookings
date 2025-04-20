@@ -8,6 +8,7 @@ const router = express.Router();
 const store_id = "wedwe6800b678e9d36";
 const store_password = "wedwe6800b678e9d36@ssl";
 const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:7000" : "http://waledbookings.onrender.com";
+const CLIENT_URL = process.env.NODE_ENV === "development" ? "http://localhost:5173" : "http://waledbookings.onrender.com";
 
 
 type RequestBody = {
@@ -100,7 +101,7 @@ router.post("/success",
             }
 
             await hotel.save();
-            res.redirect(`${BASE_URL}/payment-success`);
+            res.redirect(`${CLIENT_URL}/payment-success`);
         
     } catch (error) {
         console.log(error);
@@ -113,13 +114,13 @@ router.post("/success",
 
 router.post("/fail",
      (req: Request, res: Response) => {
-        res.redirect(`${BASE_URL}/payment-failed`);
+        res.redirect(`${CLIENT_URL}/payment-failed`);
      }
 )
 
 router.post("/cancel",
      (req: Request, res: Response) => {
-        res.redirect(`${BASE_URL}/payment-cancelled`);
+        res.redirect(`${CLIENT_URL}/payment-cancelled`);
      }
 )
 

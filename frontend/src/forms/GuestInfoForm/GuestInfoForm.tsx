@@ -57,6 +57,8 @@ const GuestInfoForm = ({ hotel, pricePerNight }: Props) => {
     defaultValues: {
       checkIn: booking.checkIn ? booking.checkIn : undefined,
       checkOut: booking.checkOut ? booking.checkOut : undefined,
+      adultCount: booking.adultsCount ? booking.adultsCount : undefined,
+      childCount: booking.childCount ? booking.childCount : undefined,
     }
   });
   const checkIn = watch("checkIn");

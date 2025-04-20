@@ -18,6 +18,9 @@ const upload = multer({
 router.get("/", verifyToken, async (req: Request, res: Response): Promise<Response<HotelType>> => {
   try {
     const hotels = await Hotel.find({ userId: req.userId });
+    if(hotels.length === 0){
+      return res.status(500).json({message: "You currenty have no hotels registered"})
+    }
     return res.json(hotels);
   } catch (error) {
     return res.status(500).json({ message: "Error fetching hotels" });

@@ -133,7 +133,11 @@ const App = () => {
         }
         />
 
-        <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/payment-success" element={
+          <BookingContextProvider>
+            <PaymentSuccess />
+          </BookingContextProvider>
+          } />
         <Route path="/payment-failed" element={<PaymentFailed />} />
         <Route path="/payment-cancelled" element={<PaymentCancelled />} />
 
