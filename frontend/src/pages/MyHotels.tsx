@@ -15,19 +15,21 @@ const MyHotels = () => {
   return (
 
     <div className="py-5">
+      
+      {/* Heading section */}
+      <div className="flex flex-col items-center lg:flex-row lg:justify-between gap-y-2 mb-3 py-3">
+        <h1 className="text-2xl font-semibold text-blue-500">My Hotels</h1>
+        <button onClick={() => navigate("/add-hotel")} className="btn-blue w-full lg:w-auto">
+            Add Hotel
+        </button>
+      </div>
 
       {
 
           isFetching ? <MyHotelsCardSkeleton/>
+          
           : hotelData ? 
             <>
-              {/* Heading section */}
-              <div className="flex flex-col items-center lg:flex-row lg:justify-between gap-y-2 mb-3 py-3">
-                <h1 className="text-2xl font-semibold text-blue-500">My Hotels</h1>
-                <button onClick={() => navigate("/add-hotel")} className="btn-blue w-full lg:w-auto">
-                    Add Hotel
-                </button>
-              </div>
               {/* All hotels section */}
               <div className="flex flex-col gap-y-5 lg:grid lg:grid-cols-1 lg:gap-8">
                 {

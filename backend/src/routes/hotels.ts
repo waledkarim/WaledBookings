@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get("/", async (req: Request, res: Response) => {
   try {
-    const hotels = await Hotel.find().sort("-lastUpdated");
+    const hotels = await Hotel.find().sort("-lastUpdated").limit(5);
     res.json(hotels);
   } catch (error) {
     console.log("error", error);

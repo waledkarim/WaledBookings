@@ -8,7 +8,7 @@ const AddHotel = () => {
   const { showToast } = useAppContext();
   const navigate = useNavigate();
 
-  const { mutate, isLoading } = useMutation(apiClient.addMyHotel, {
+  const { mutate, isLoading, } = useMutation(apiClient.addMyHotel, {
     onSuccess: () => {
       showToast({ message: "Hotel Saved!", type: "SUCCESS" });
       navigate("/my-hotels");

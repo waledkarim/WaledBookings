@@ -22,7 +22,7 @@ const Home = () => {
             {/* Heading section */}
             <div className="flex flex-col py-2">
               <h2 className="text-3xl font-bold">Latest Destinations</h2>
-              <p>Most recent desinations added by your favourite hotel managers</p>
+              <p>Most recent desinations added by hotel managers</p>
             </div>
 
             {/* Main section */}
