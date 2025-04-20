@@ -183,7 +183,7 @@ const BookingForm = () => {
                 BDT {totalPrice?.toLocaleString()}
             </div>
             <p className="text-xs font-semibold">
-                Do not provide your valid credentials. Use any of the test credentials provided here or just use bKash and click success.
+                Do not provide your valid credentials. Use bKash and click success.
             </p>
           </div>
         </div>
