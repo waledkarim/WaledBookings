@@ -13,7 +13,7 @@ const PaymentFailed = () => {
       </div>
       <button
         onClick={() => navigate(`/hotel/${hotelId}/booking`)} 
-        className="py-3 bg-red-600 text-white rounded-xl hover:bg-red-700"
+        className="px-6 py-3 bg-red-600 text-white rounded-xl hover:bg-red-700"
       >
         Try Again
       </button>
