@@ -47,7 +47,10 @@ const Header = () => {
                                     <div className="relative">
                                         <GiHamburgerMenu size={20} className="text-white cursor-pointer lg:hidden" onClick={handleHamburgerClick}/>
                                         {
-                                            open && <div onClick={() => setOpen(false)} className="w-[200px] absolute right-0 top-full flex flex-col gap-y-2 bg-white rounded-lg shadow-md py-2">
+                                        <div onClick={() => setOpen(false)} className={`w-[200px] absolute right-0 top-full flex flex-col gap-y-2 bg-white rounded-lg   shadow-md py-2 
+                                            transition-all duration-300 ease-out
+                                            ${open ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}
+                                          `}>
                                                 <Link to={"/my-bookings"} className="link-btn">My Bookings</Link>
                                                 <Link to={"/my-hotels"} className="link-btn">My Hotels</Link>
                                                 <SignOutButton />
