@@ -40,8 +40,7 @@ router.get("/:id", verifyToken, async (req: Request<{id:string}>, res: Response)
   }
 });
 
-router.post(
-    "/",
+router.post("/",
     verifyToken,
     [
       body("name").notEmpty().withMessage("Name is required"),
