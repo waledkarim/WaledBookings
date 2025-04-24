@@ -8,7 +8,7 @@ const PaymentCancelled = () => {
     removeBookingValues();
   
     return (
-      <div className="flex flex-col justify-center min-h-screen bg-yellow-50 p-5">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-yellow-50 p-5">
         <div className="flex flex-col items-start">
           <h1 className="text-4xl font-bold text-yellow-700 mb-4">⚠️Payment Cancelled</h1>
           <p className="text-lg text-yellow-800 mb-8">You cancelled the payment. No worries—you can always book again.</p>

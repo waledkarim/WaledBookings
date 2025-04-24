@@ -42,16 +42,12 @@ router.get("/search", async (req: Request, res: Response) => {
         req.query.page ? req.query.page.toString() : "1"
       );
       const skip = (pageNumber - 1) * pageSize;
-
-      console.log("query: ",query);
   
       const hotels = await Hotel.find(query)
         .sort(sortOptions)
         .skip(skip)
         .limit(pageSize);
 
-        console.log(hotels);
-  
       const total = await Hotel.countDocuments(query);
   
       const response: HotelSearchResponse = {
