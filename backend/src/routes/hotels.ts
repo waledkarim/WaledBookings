@@ -41,13 +41,16 @@ router.get("/search", async (req: Request, res: Response) => {
       const pageNumber = parseInt(
         req.query.page ? req.query.page.toString() : "1"
       );
-      
       const skip = (pageNumber - 1) * pageSize;
+
+      console.log("query: ",query);
   
       const hotels = await Hotel.find(query)
         .sort(sortOptions)
         .skip(skip)
         .limit(pageSize);
+
+        console.log(hotels);
   
       const total = await Hotel.countDocuments(query);
   
@@ -127,11 +130,12 @@ router.get("/:hotelId/unavailable-dates",
 
 
 const constructSearchQuery = (queryParams: any) => {
+
     let constructedQuery: any = {};
-  
   
     if (queryParams.destination) {
       constructedQuery.$or = [
+        {name: new RegExp(queryParams.destination, "i")},
         { city: new RegExp(queryParams.destination, "i") },
         { country: new RegExp(queryParams.destination, "i") },
       ];
